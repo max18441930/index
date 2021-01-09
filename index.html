@@ -1,0 +1,201 @@
+<html>
+<head>
+<div id=text>Я ТЕБЯ НАЙДУ</div>
+<style>
+#calendar {
+  width: 100%;
+  font: monospace;
+  line-height: 1.2em;
+  font-size: 15px;
+  text-align: center;
+}
+#calendar thead tr:last-child {
+  font-size: small;
+  color: rgb(85, 85, 85);
+}
+#calendar thead tr:nth-child(1) td:nth-child(2) {
+  color: rgb(50, 50, 50);
+}
+#calendar thead tr:nth-child(1) td:nth-child(1):hover, #calendar thead tr:nth-child(1) td:nth-child(3):hover {
+  cursor: pointer;
+}
+#calendar tbody td {
+  color: rgb(44, 86, 122);
+}
+#calendar tbody td:nth-child(n+6), #calendar .holiday {
+  color: rgb(231, 140, 92);
+}
+#calendar tbody td.today {
+  background: rgb(220, 0, 0);
+  color: #fff;
+}
+</style>
+<link rel="stylesheet" href="кринженеры.css">
+</head>
+<body>
+<table id=table>
+
+
+
+<tr>
+<th><div>
+<script>
+<!-- 
+var h=(Math.random()*11); 
+ if (h < 1) document.writeln("Легче всего создаются трудности."); 
+ if (h > 1 && h < 2) document.writeln("Минус - это уже половина плюса, а плюс - это, порой, целых два минуса..."); 
+ if (h > 2 && h < 3) document.writeln("В любом из нас спит гений. И с каждым днем все крепче."); 
+ if (h > 3 && h < 4) document.writeln("Хотите избавиться от осадка на душе - не кипятитесь."); 
+ if (h > 4 && h < 5) document.writeln("Трудно ничего не делать, но мы не боимся трудностей."); 
+ if (h > 5 && h < 6) document.writeln("Работа не волк, а пpоизведение силы на pасстояние."); 
+ if (h > 6 && h < 7) document.writeln("В любом из нас спит гений. И с каждым днем все крепче."); 
+ if (h > 7 && h < 8) document.writeln("Чтобы слова не расходились с делом, нужно молчать и ни хрена не делать."); 
+ if (h > 8 && h < 9) document.writeln("Говори кратко, проси мало, уходи быстро."); 
+ if (h > 9 && h <10) document.writeln("Улыбайтесь! Это всех раздрожает!"); 
+ if (h > 10 && h <11) document.writeln("Чем меньше должность, тем заметнее твое отсутствие на рабочем месте."); 
+// -->
+</script>
+</div></th>
+<th>
+
+<div align=center>
+<div style="height: 187px; width: 187px; border:1px solid #c0c0c0; padding:6px;">
+<table id="calendar"  border="0" cellspacing="0" cellpadding="1">
+  <thead>
+    <tr><td><b>‹</b><td colspan="5"><td><b>›</b>
+    <tr><td>Пн<td>Вт<td>Ср<td>Чт<td>Пт<td>Сб<td>Вс
+  </thead>
+  <tbody></tbody>
+</table>
+</div>
+</div>
+
+<script>
+function calendar(id, year, month) {
+var Dlast = new Date(year,month+1,0).getDate(),
+    D = new Date(year,month,Dlast),
+    DNlast = new Date(D.getFullYear(),D.getMonth(),Dlast).getDay(),
+    DNfirst = new Date(D.getFullYear(),D.getMonth(),1).getDay(),
+    calendar = '<tr>',
+    month=["Январь","Февраль","Март","Апрель","Май","Июнь","Июль","Август","Сентябрь","Октябрь","Ноябрь","Декабрь"];
+if (DNfirst != 0) {
+  for(var  i = 1; i < DNfirst; i++) calendar += '<td>';
+}else{
+  for(var  i = 0; i < 6; i++) calendar += '<td>';
+}
+for(var  i = 1; i <= Dlast; i++) {
+  if (i == new Date().getDate() && D.getFullYear() == new Date().getFullYear() && D.getMonth() == new Date().getMonth()) {
+    calendar += '<td class="today">' + i;
+  }else{
+    calendar += '<td>' + i;
+  }
+  if (new Date(D.getFullYear(),D.getMonth(),i).getDay() == 0) {
+    calendar += '<tr>';
+  }
+}
+for(var  i = DNlast; i < 7; i++) calendar += '<td> ';
+document.querySelector('#'+id+' tbody').innerHTML = calendar;
+document.querySelector('#'+id+' thead td:nth-child(2)').innerHTML = month[D.getMonth()] +' '+ D.getFullYear();
+document.querySelector('#'+id+' thead td:nth-child(2)').dataset.month = D.getMonth();
+document.querySelector('#'+id+' thead td:nth-child(2)').dataset.year = D.getFullYear();
+if (document.querySelectorAll('#'+id+' tbody tr').length < 6) {  // чтобы при перелистывании месяцев не "подпрыгивала" вся страница, добавляется ряд пустых клеток. Итог: всегда 6 строк для цифр
+    document.querySelector('#'+id+' tbody').innerHTML += '<tr><td> <td> <td> <td> <td> <td> <td> ';
+}
+}
+calendar("calendar", new Date().getFullYear(), new Date().getMonth());
+// переключатель минус месяц
+document.querySelector('#calendar thead tr:nth-child(1) td:nth-child(1)').onclick = function() {
+  calendar("calendar", document.querySelector('#calendar thead td:nth-child(2)').dataset.year, parseFloat(document.querySelector('#calendar thead td:nth-child(2)').dataset.month)-1);
+}
+// переключатель плюс месяц
+document.querySelector('#calendar thead tr:nth-child(1) td:nth-child(3)').onclick = function() {
+  calendar("calendar", document.querySelector('#calendar thead td:nth-child(2)').dataset.year, parseFloat(document.querySelector('#calendar thead td:nth-child(2)').dataset.month)+1);
+}
+</script></th>
+</tr>
+
+<!-- 1 -->
+
+<tr>
+<th><p><a href="Александр Левыкин.html">Александр Левыкин</a></p>
+<p>Дальше действовать будем мы</p></th>
+<th><img src="https://sun1-15.userapi.com/impg/v5Mbvko4JKL7Mt0CReXO2j6t13GWTNxBk5_cJg/P2mv9tqA7yQ.jpg?size=200x0&quality=96&crop=377,0,1709,1709&sign=35b524cfcd8d360e0f0daa577111bb4b&ava=1"></th>
+</tr>
+
+<!-- 2 -->
+
+<tr>
+<th><p><a href="Артем Саламатов.html">Артем Саламатов</a></p> 
+<p>амбассадор пессимизма</p></th>
+<th><img src="https://sun1-99.userapi.com/impg/ZKd6M9u7113MHQQ8EmJ7_Tn6p4_Tdf1h21_vhA/H6Uki4KNc8Y.jpg?size=200x0&quality=96&crop=2,359,1617,1617&sign=ab96c4b1b85f33c45db71a6dee886ad6&ava=1"></th>
+</tr>
+
+<!-- 3 -->
+
+<tr>
+<th><p><a href="Ваня Ушаков.html">Ваня Ушаков</a></p> 
+<p>https://youtu.be/qZA4sZ_BN6g</p></th>
+<th><img src="https://sun1-84.userapi.com/impg/4ou93HMRkA_tQDOU9qXiHYffDb-13h-Fr3YX4w/AUewdARK0DE.jpg?size=200x0&quality=96&crop=2,17,1198,1198&sign=631740fb8915eb5e60de4e852ba7d85d&ava=1"></th>
+</tr>
+
+<!-- 4 -->
+
+<tr>
+<th><p><a href="Anna Gordienko.html">Anna Gordienko</a></p> 
+<p>•Пути панка неисповедимы•</p></th>
+<th><img src="https://sun1-95.userapi.com/impf/c844618/v844618875/1cff64/imJtKFZILMg.jpg?size=200x0&quality=96&crop=0,1,681,681&sign=49c7894680d0c824205f140668055323&ava=1"></th>
+</tr>
+
+<!-- 5 -->
+
+<tr>
+<th><p><a href="Marsel Abdulberov.html">Marsel Abdulberov</a></p> 
+<p>4ever_Molodoy</p></th>
+<th><img src="https://sun1-22.userapi.com/impg/KSk_V02hCFbyrrury2fK2ladtnSe3UV-2RwAtQ/NzcEtBdsw_Q.jpg?size=200x0&quality=96&crop=0,64,692,692&sign=b383980842bc1d2d1e097e51b81d9b8d&ava=1"></th>
+</tr>
+
+<!-- 6 -->
+
+<tr>
+<th><p><a href="Sonya Shilova.html">Sonya Shilova</a></p> 
+<p>главное не завтыкать</p></th>
+<th><img src="https://sun1-23.userapi.com/impg/WAOSDhmTnz6WNXvey_to3CdVljcYPIlNNzOKSg/-qKfOZfwzPE.jpg?size=200x0&quality=96&crop=174,0,507,507&sign=5910fb291fa5edf5f37bc43af3d387df&ava=1"></th>
+</tr>
+
+<!-- 7 -->
+
+<tr>
+<th><p><a href="Максим Игнатов.html">Максим Игнатов</a></p> 
+<p>А вот надо было раньше</p></th>
+<th><img src="https://sun1-16.userapi.com/impg/nVcA9AUVmWFzd9TvlA6Bu8yjzg8x2v78-3wH9A/Ixh8QcdoBiA.jpg?size=200x0&quality=96&crop=0,248,640,640&sign=e9b8acdf6e3e059084b4ef849906a945&ava=1"></th>
+</tr>
+
+<!-- 8 -->
+
+<tr>
+<th><p><a href="Олег Владиславский.html">Олег Владиславский</a></p> 
+<p>выживаю</p></th>
+<th><img src="https://sun1-86.userapi.com/impg/D-RTPhM_WA_MQuSjhPDoFZ1Lr2lcXJhhr6HrYw/4pRv8hmYaQA.jpg?size=200x0&quality=96&crop=264,141,752,752&sign=4c3bb5237167866ad1133619e5aaf063&ava=1"></th>
+</tr>
+
+<!-- 9 -->
+
+<tr>
+<th><p><a href="Артем Лутченко.html">Артем Лутченко</a></p> 
+<p>Don't disturb.</p></th>
+<th><img src="https://sun1-90.userapi.com/impg/U82H_ahIPiDd11-DAg7rwfS9vSu_y0wThcZ04g/vv4KRCB8r34.jpg?size=200x0&quality=96&crop=165,3,1587,1587&sign=2b0771b840403439c67f0875133a3c73&ava=1"></th>
+</tr>
+
+<!-- 10 -->
+
+<tr>
+<th><p><a href="Филипп Мамун.html">Филипп Мамун</a></p> 
+<p>Cursed.</p></th>
+<th><img src="https://sun1-83.userapi.com/impg/c857532/v857532603/1a5b76/oIqZAX4pRVI.jpg?size=200x0&quality=96&crop=1162,460,314,314&sign=b3e16ea36d7cae731890a4b3d915357e&ava=1"></th>
+</tr>
+
+
+
+<script type="text/javascript" src="http://uguide.ru/js/script/snowcursor.min.js"></script>
+</body>
+</html>
